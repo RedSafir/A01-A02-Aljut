@@ -3,7 +3,8 @@ const int btn2 = 4;
 const int led1 = 3;
 const int led2 = 2;
 const int lEd[] = {6,11,8,13,9,12,7,10}; //lampu zigzag
-const int lEd2[] = {6,7,8,9,13,12,11,10};
+const int lEd2[] = {6,7,8,9,13,12,11,10}; //lampu arah jam
+const int lEd3[] = {6,7,10,11,8,9,12,13}; //kedip kanan kiri
 int i;
 
 void setup() {
@@ -49,7 +50,8 @@ void loop() {
 ///------------LED muter ke kiri=> kanan
        if (digitalRead(led2) == 1)
         {
-          zigzag();
+//          zigzag();
+            kedipKananKiri();
         }
 
   if(digitalRead(led1) == 1 ||  digitalRead(led2) == 1)
@@ -60,7 +62,7 @@ void loop() {
   }
 }
 
-void zigzag()
+void zigzag() //muter zigzag
 {
   for(int i=0; i<=7; i++)
   {
@@ -74,7 +76,7 @@ void zigzag()
   }
 }
 
-void kiriKananJam()
+void kiriKananJam() //muter arah jam
 {
   i = 7;
   do
@@ -89,4 +91,58 @@ void kiriKananJam()
     i = i - 1;
       
   }while(i>=0);
+}
+
+void kedipKananKiri() //kedip 4 led kanan 3x lalu 4 led kiri 3x
+{
+  int p = 0;
+  do
+  {
+       if(digitalRead(btn2)==0 || digitalRead(btn1)==0)
+       {
+          break;
+       }
+    digitalWrite(lEd3[0],!digitalRead(lEd3[0]));
+    digitalWrite(lEd3[1],!digitalRead(lEd3[1]));
+    digitalWrite(lEd3[2],!digitalRead(lEd3[2]));
+    digitalWrite(lEd3[3],!digitalRead(lEd3[3]));
+
+    delay(250);
+
+    digitalWrite(lEd3[0],LOW);
+    digitalWrite(lEd3[1],LOW);
+    digitalWrite(lEd3[2],LOW);
+    digitalWrite(lEd3[3],LOW);
+    
+    delay(250);
+    p = p + 1;
+    Serial.print("kanan "); Serial.println(p);
+    
+  }while(p < 3);
+
+  p = 0;
+  
+  do
+  {
+       if(digitalRead(btn2)==0 || digitalRead(btn1)==0)
+       {
+          break;
+       }
+    digitalWrite(lEd3[4],!digitalRead(lEd3[4]));
+    digitalWrite(lEd3[5],!digitalRead(lEd3[5]));
+    digitalWrite(lEd3[6],!digitalRead(lEd3[6]));;
+    digitalWrite(lEd3[7],!digitalRead(lEd3[7]));
+
+    delay(250);
+
+    digitalWrite(lEd3[4],LOW);
+    digitalWrite(lEd3[5],LOW);
+    digitalWrite(lEd3[6],LOW);
+    digitalWrite(lEd3[7],LOW);
+
+    delay(250);
+    p = p + 1;
+    
+    Serial.print("kiri "); Serial.println(p);
+  }while(p < 3);
 }
