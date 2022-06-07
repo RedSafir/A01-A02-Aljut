@@ -20,5 +20,7 @@
     <li><250 led1 dan led2 mati</li>
   </ul>
 
+<h5>07/06/2022</h5>
+<p>Penambahan program mic ve22 fix, tapi harus pake mic-A, sistemnya masih diem=> muter kanan=> muter kiri=> diem</p> 
 
 
